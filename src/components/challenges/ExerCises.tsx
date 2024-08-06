@@ -3,15 +3,26 @@ import style from '../../styles/components/challenges/Exercises.module.css';
 import ExerCisecard from './ExerCisecard';
 import useWorkout from '../../hooks/useWorkout';
 
-
+interface Workout {
+  id: number;
+  title: string;
+  description: string;
+  startDate: Date;
+  endDate: Date;
+  totalDays: number;
+  frequency: number;
+  completedDays: number;
+  totalMissing: number;
+  duration:number,
+  state:string
+}
 
 export default function Exercises() {
   const { getWorkouts } = useWorkout();
-  const [workouts, setWorkouts] = useState([]);
+  const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [filter, setFilter] = useState<string>('active');
-
   useEffect(() => {
-    const filteredWorkouts = getWorkouts(new Date(), filter);
+    const filteredWorkouts:Workout[] = getWorkouts(new Date(), filter);
     setWorkouts(filteredWorkouts);
     console.log(filteredWorkouts);
   }, [filter]);

@@ -6,7 +6,7 @@ interface Workout {
   title: string;
   description: string;
   frequency: number;
-  startDate: string;
+  startDate: Date;
   duration: number;
   completedDays: number;
   totalMissing: number;
@@ -25,8 +25,8 @@ const ExerCisecard: React.FC<ExerCisecardProps> = ({ workout }) => {
         <p className={style.description}>{workout.description}</p>
       </div>
       <div className={style.progress}>
-        <span className={style.completedDays}>{`Completed Tasks: ${workout.completedDays}/${workout.totalDays}`}</span>
-        <span className={style.totalMissing}>{`Missed Tasks: ${workout.totalMissing}/${workout.totalDays}`}</span>
+        <span className={style.completedDays}>{`Completed Days: ${workout.completedDays}/${workout.totalDays}`}</span>
+        <span className={style.totalMissing}>{`Missed Days: ${workout.totalMissing}/${workout.totalDays}`}</span>
       </div>
       <div className={style.radioContainer}>
         <div className={style.radioOption}>

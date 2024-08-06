@@ -5,20 +5,17 @@ import { RootState } from "../reducer";
 
 const useWorkout = () => {
     const workouts = useSelector((state: RootState) => state.workout.workouts);
-    console.log(workouts);
     const getDailyExercise = (date: Date) => {
         const res=workouts.filter(workout => {
-            return workout.state === 'active' &&
-                date >= workout.startDate && date <= workout.endDate &&
-                (workout.completedDays + workout.totalMissing !== workout.totalDays || 
-                workout.completedDays !== workout.totalDays);
+            console.log(new Date(date) <= new Date(workout.startDate)&&new Date(workout.endDate)>=new Date(date))
+            return workout.state === 'active' &&(workout.completedDays + workout.totalMissing !== workout.totalDays || 
+                workout.completedDays !== workout.totalDays)&&new Date(date) <= new Date(workout.startDate)&&new Date(workout.endDate)>=new Date(date);
         });
-        console.log(res)
         return res
     };
 
     const getCompletedExercise = (date: Date) => {
-        return workouts.filter(workout =>workout.state==='completed' || workout.completedDays === workout.totalDays ||date>=new Date(workout.endDate) );
+        return workouts.filter(workout =>workout.state==='completed' || workout.completedDays === workout.totalDays ||new Date(date)>=new Date(workout.endDate) );
     };
 
     const getMissedExercise = () => {
