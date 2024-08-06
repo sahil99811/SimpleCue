@@ -30,7 +30,7 @@ export default function WorkoutsPage() {
     }
   return (
     <div className={style.container} >
-      <GreetingSection question="Do you want to add workout ?" desc="Click On Button to add WorkOut!" buttonContent="Create Workout" page="workout" openModal={openModal}/>    
+      <GreetingSection question="Do you want to add workout ?" desc="Click On Button to add WorkOut!" buttonContent="Create Workout"  openModal={openModal}/>    
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

@@ -5,11 +5,10 @@ interface GreetingSectionProps{
    desc:string,
    question:string,
    buttonContent:string,
-   page:string,
    openModal:()=>void
 
 }
-const GreetingSection: React.FC<GreetingSectionProps> = ({question,desc,buttonContent,page,openModal}) => {
+const GreetingSection: React.FC<GreetingSectionProps> = ({question,desc,buttonContent,openModal}) => {
   const onClickHandler=()=>{
     openModal();
   }

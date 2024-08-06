@@ -14,7 +14,7 @@ export default function ChallengesPage() {
   };
   return (
     <div className={style.container}>
-      <GreetingSection question="What do you workout today?" desc="Start practicing your WorkOut!" buttonContent="Start Workout" page="challenges"  openModal={scrollToExercises}/>
+      <GreetingSection question="What do you workout today?" desc="Start practicing your WorkOut!" buttonContent="Start Workout"  openModal={scrollToExercises}/>
       <div ref={exercisesRef}>
         <Exercises />
       </div>

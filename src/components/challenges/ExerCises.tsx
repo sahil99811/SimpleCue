@@ -1,19 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import style from '../../styles/components/challenges/Exercises.module.css';
 import ExerCisecard from './ExerCisecard';
-
 import useWorkout from '../../hooks/useWorkout';
+
+interface Workout {
+    title: string;
+    frequency: number;
+    duration: number;
+    startDate: string;
+    description: string;
+    id: number;
+    endDate: string;
+    totalDays: number;
+    completedDays: number;
+    totalMissing: number;
+    state: string;
+}
 
 export default function Exercises() {
   const { getWorkouts } = useWorkout();
-  const [workouts, setWorkouts] = useState([]);
-  const [filter, setFilter] = useState('active');
+  const [workouts, setWorkouts] = useState<Workout[]>([]);
+  const [filter, setFilter] = useState<string>('active');
 
   useEffect(() => {
     const filteredWorkouts = getWorkouts(new Date(), filter);
-    console.log(workouts);
-    // setWorkouts(filteredWorkouts);
-  }, [filter, getWorkouts]);
+    setWorkouts(filteredWorkouts);
+    console.log(filteredWorkouts);
+  }, [filter]);
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setFilter(event.target.value);
