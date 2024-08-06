@@ -1,4 +1,4 @@
-import React ,{useState} from 'react'
+import {useState} from 'react'
 import WorkoutForm from '../components/workouts/WorkoutForm'
 import GreetingSection from '../components/common/GreetingSection'
 import Modal from "react-modal";

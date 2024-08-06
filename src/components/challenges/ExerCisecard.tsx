@@ -18,6 +18,7 @@ interface ExerCisecardProps {
 }
 
 const ExerCisecard: React.FC<ExerCisecardProps> = ({ workout }) => {
+  
   return (
     <div className={style.container}>
       <div className={style.header}>

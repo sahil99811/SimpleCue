@@ -33,7 +33,7 @@ const useWorkout = () => {
         }
         return [];
     };
-
+    
     return { getWorkouts };
 };
 
