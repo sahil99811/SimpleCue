@@ -26,11 +26,11 @@ export default function Exercises() {
     setWorkouts(filteredWorkouts);
     console.log(filteredWorkouts);
   }, [filter]);
-
+  
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setFilter(event.target.value);
   };
-
+   
   return (
     <div className={style.container}>
       <div className={style.header}>
@@ -46,7 +46,7 @@ export default function Exercises() {
       </div>
       <div className={style.exercisesContainer}>
         {workouts?.map((workout, index) => (
-          <ExerCisecard key={index} workout={workout} />
+          <ExerCisecard key={index} workout={workout} filter={filter} />
         ))}
       </div>
     </div>
