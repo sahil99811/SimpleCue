@@ -1,0 +1,48 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 80vh;
+    max-height: 80vh;
+    overflow-y: scroll;
+
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 10px;
+    position: absolute;
+    width: 90%;
+}
+.title{
+    font-size: 2rem;
+    font-weight: 500;
+    font-family: 'Poppins',sans-serif;
+
+}
+.filterContainer{  
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+}
+
+.filterLabel{
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-family: 'Poppins',sans-serif;
+}
+.filterSelect{
+    width:150px;
+    height: 40px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    font-family: 'Poppins',sans-serif;
+}
+
+.exercisesContainer{
+    display: flex;
+    flex-direction: column;
+    margin-top: 4rem;
+    gap: 10px;
+}
