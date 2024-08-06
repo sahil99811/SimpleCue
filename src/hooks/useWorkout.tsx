@@ -1,8 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../reducer";
 import { addWorkout } from "../slices/workoutSlice";
-import { useEffect } from "react";
-
 
 
 const useWorkout = () => {
