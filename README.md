@@ -1,30 +1,84 @@
-# React + TypeScript + Vite
+Based on the provided functionality and technical requirements for the SimpleCue project, here’s a detailed `README.md` file:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# SimpleCue
 
-Currently, two official plugins are available:
+SimpleCue is a React.js application for managing personal challenges. It allows users to create, update, and track challenges, displaying progress and filtering challenges based on their status. The application uses TypeScript and persists data in `localStorage` for a seamless user experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Basic Functionality
 
-## Expanding the ESLint configuration
+- **Create Challenges:** Add new challenges with a title, description, start date, and end date.
+- **Define Frequency:** Set the challenge frequency (e.g., daily, weekly).
+- **Track Progress:** Mark each day/week as completed or missed.
+- **Progress Display:** View progress based on the challenge's start and end dates.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Advanced Features
 
-- Configure the top-level `parserOptions` property like this:
+- **Update Challenges:** Modify existing challenges as needed.
+- **Data Persistence:** Challenges and progress are saved in `localStorage`, ensuring data is retained after page refreshes.
+- **Filter Challenges:** View active challenges first and filter by status (Active, Completed, Missed).
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Technical Requirements
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- **React.js:** Build the user interface using React.js.
+- **TypeScript:** Utilize TypeScript for type safety and better development experience.
+- **State Management:** Manage the application's state effectively.
+- **LocalStorage:** Persist data using `localStorage` for persistence across sessions.
+- **Responsiveness:** Ensure the application is responsive and functions well on various screen sizes.
+
+## Installation
+
+To set up SimpleCue on your local machine, follow these steps:
+
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/sahil99811/SimpleCue.git
+   ```
+
+2. **Navigate to the Project Directory:**
+   ```bash
+   cd SimpleCue
+   ```
+
+3. **Install Dependencies:**
+   Ensure you have [Node.js](https://nodejs.org/) installed. Then, install the necessary dependencies:
+   - Using npm:
+     ```bash
+     npm install
+     ```
+   - Using Yarn:
+     ```bash
+     yarn install
+     ```
+
+4. **Run the Development Server:**
+   Start the development server to see the application in action:
+   - Using npm:
+     ```bash
+     npm start
+     ```
+   - Using Yarn:
+     ```bash
+     yarn start
+     ```
+
+   Open your browser and go to `http://localhost:3000` (or another port if specified).
+
+5. **Build for Production:**
+   To create a production build:
+   - Using npm:
+     ```bash
+     npm run build
+     ```
+   - Using Yarn:
+     ```bash
+     yarn build
+     ```
+
+   The build files will be located in the `build` directory.
+
+## Usage
+
+1. **Creating a Challenge:** Navigate to the challenge creation form and provide the necessary details (title, description, start date, end date, frequency).
+2. **Updating a Challenge:** Use the update option to modify existing challenges.
+3. **Marking Progress:** Update the status of each day/week as completed or missed.
+4. **Filtering and Viewing:** Use the filter options to view challenges based on their status and see active challenges first.
