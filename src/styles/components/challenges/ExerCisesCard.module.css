@@ -113,6 +113,11 @@
     .radioLabel {
       font-size: 0.85rem;
     }
+    .progress{
+        flex-direction: column;
+        gap: 0px;
+     }
+   
   }
   
   /* For extra small screens */
@@ -120,14 +125,11 @@
     .container {
       padding: 5px;
     }
-     .header{
+    .header{
         flex-direction: column;
         gap: 0px;
      }
-     .progress{
-        flex-direction: column;
-        gap: 0px;
-     }
+    
     .title {
       font-size: 0.9rem;
     }
@@ -140,12 +142,13 @@
     .totalMissing {
       font-size: 0.8rem;
     }
-     .radioContainer{
-        flex-direction: column;
-        gap: 5px;
-     }
+    
     .radioLabel {
       font-size: 0.8rem;
     }
+    .radioContainer{
+        flex-direction: column;
+        gap: 5px;
+     }
   }
   

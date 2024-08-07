@@ -46,6 +46,8 @@ const ExerCisecard: React.FC<ExerCisecardProps> = ({ workout,filter }) => {
       <div className={style.progress}>
         <span className={style.completedDays}>{`Completed Days: ${workout.completedDays}/${workout.totalDays}`}</span>
         <span className={style.totalMissing}>{`Missed Days: ${workout.totalMissing}/${workout.totalDays}`}</span>
+        <span className={style.totalMissing}>{`Duration: ${workout.duration} Weeks`}</span>
+        <span className={style.totalMissing}>{`Frequency: ${workout.frequency} Days A Week`}</span>
       </div>
       {
         (filter==='active')&&<div className={style.radioContainer}>
