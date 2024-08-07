@@ -18,10 +18,13 @@ interface Workout {
 
 interface WorkoutState {
     workouts: Workout[];
+    exercises:Workout[]
+
 }
 
 const initialState: WorkoutState = {
-    workouts: localStorage.getItem('workouts') ? JSON.parse(localStorage.getItem('workouts') as string) : []
+    workouts: localStorage.getItem('workouts') ? JSON.parse(localStorage.getItem('workouts') as string) : [],
+    exercises:[]
 };
 
 
@@ -32,9 +35,12 @@ const workoutSlice = createSlice({
         addWorkout(state, action: PayloadAction<Workout[]>) {
             state.workouts = action.payload; 
             localStorage.setItem('workouts', JSON.stringify(state.workouts)); 
+        },
+        setExercises(state,action:PayloadAction<Workout[]>){
+            state.exercises=action.payload;
         }
     }
 });
 
-export const { addWorkout} = workoutSlice.actions;
+export const { addWorkout,setExercises} = workoutSlice.actions;
 export default workoutSlice.reducer;

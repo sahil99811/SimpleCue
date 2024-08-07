@@ -1,48 +1,151 @@
-.container{
-    display:flex;
+.container {
+    display: flex;
+    flex-direction: column;
     gap: 10px;
     padding: 10px;
-    background: rgb(118,118,118);
-    background: linear-gradient(117deg, rgba(118,118,118,1) 0%, rgba(225,224,220,0.8794406797827744) 100%);
+    background: rgb(118, 118, 118);
+    background: linear-gradient(117deg, rgba(118, 118, 118, 1) 0%, rgba(225, 224, 220, 0.879) 100%);
     border-radius: 10px;
-}
-.header{
+  }
+  
+  /* Header Styles */
+  .header {
     display: flex;
-    flex-direction: column;
-    width: 30%;
-}
-.title{
-    font-size: 1rem;
-    font-family: 'Poppins',sans-serif;
+    gap:10px;
+    width: 100%;
+  }
+  
+  .title {
+    font-size: 1.25rem;
+    font-family: 'Poppins', sans-serif;
     font-weight: 500;
+  }
+  
+  .description {
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    margin-top: 5px;
+  }
+  
+  /* Progress Styles */
+  .progress {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .completedDays,
+  .totalMissing {
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+  }
+  
+  /* Radio Container Styles */
+  .radioContainer {
+    display: flex;
+    gap: 10px;
+    gap: 5px;
+  }
+  
+  .radioOption {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .radioInput {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .radioLabel {
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+  }
+  
+  /* Responsive Styles */
+  
+  /* For tablets and small desktops */
+  @media (max-width: 1024px) {
+    .container {
+      padding: 8px;
+    }
+  
+    .title {
+      font-size: 1.15rem;
+    }
+  
+    .description {
+      font-size: 0.9rem;
+    }
+  
+    .completedDays,
+    .totalMissing {
+      font-size: 0.9rem;
+    }
+  
+    .radioLabel {
+      font-size: 0.9rem;
+    }
+  }
+  
+  /* For mobile devices */
+  @media (max-width: 768px) {
+    .container {
+      padding: 6px;
+    }
     
-
-}
-.description{
-    font-size: 1.5rem;
-    font-family: 'Poppins',sans-serif;
-    font-weight: 500;
-}
-.progress{
-    display: flex;
-    flex-direction: column;
-}
-.completedDays{
-    font-size: 1rem;
-    font-family: 'Poppins',sans-serif;
-    font-weight: 500;
-}
-.totalMissing{
-    font-size: 1rem;
-    font-family: 'Poppins',sans-serif;
-    font-weight: 500;
-}
-.radioContainer{
-    display: flex;
-    flex-direction: column;
-}
-.radioOption{
-     display: flex;
-     align-items: center;
-     gap: 5px;
-}
+    .title {
+      font-size: 1rem;
+    }
+  
+    .description {
+      font-size: 0.85rem;
+    }
+  
+    .completedDays,
+    .totalMissing {
+      font-size: 0.85rem;
+    }
+  
+    .radioLabel {
+      font-size: 0.85rem;
+    }
+  }
+  
+  /* For extra small screens */
+  @media (max-width: 480px) {
+    .container {
+      padding: 5px;
+    }
+     .header{
+        flex-direction: column;
+        gap: 0px;
+     }
+     .progress{
+        flex-direction: column;
+        gap: 0px;
+     }
+    .title {
+      font-size: 0.9rem;
+    }
+  
+    .description {
+      font-size: 0.8rem;
+    }
+   
+    .completedDays,
+    .totalMissing {
+      font-size: 0.8rem;
+    }
+     .radioContainer{
+        flex-direction: column;
+        gap: 5px;
+     }
+    .radioLabel {
+      font-size: 0.8rem;
+    }
+  }
+  

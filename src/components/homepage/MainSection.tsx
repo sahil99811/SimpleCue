@@ -8,7 +8,7 @@ import book from '../../assets/book.png';
 import goal from '../../assets/goal.png';
 import running from '../../assets/running.png';
 import diet from '../../assets/diet.png';
-
+import { useNavigate } from 'react-router-dom';
 interface Challenge {
   id: number;
   name: string;
@@ -24,6 +24,7 @@ const challengesData: Challenge[] = [
 ];
 
 const MainSection: React.FC = () => {
+  const navigate=useNavigate();
   return (
     <div className={style.container}>
       <section className={style.start}>
@@ -38,7 +39,7 @@ const MainSection: React.FC = () => {
         <div className={style.activitycontent}>
           <h3>Track Your Daily Activity And Do Improvements</h3>
           <p>Daily Activity Tracking Helps You To Get Consider and Achieve Your Goals Faster.</p>
-          <button>Let's Get Started</button>
+          <button onClick={()=>navigate('/challenges')}>Let's Get Started</button>
         </div>
         <img src={activity} className={style.activityimage} alt="Activity" />
       </section>
@@ -48,7 +49,7 @@ const MainSection: React.FC = () => {
         <div className={style.challengescontent}>
           <h3>Push Yourself And Take Challenges</h3>
           <p>There Are Many Challenges Available On The App That You Can Take According To Your Capability.</p>
-          <button>Take A Challenge</button>
+          <button onClick={()=>navigate('/workouts')}>Take A Challenge</button>
         </div>
       </section>
       

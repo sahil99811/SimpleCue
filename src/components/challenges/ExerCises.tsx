@@ -2,35 +2,21 @@ import React, { useState, useEffect } from 'react';
 import style from '../../styles/components/challenges/Exercises.module.css';
 import ExerCisecard from './ExerCisecard';
 import useWorkout from '../../hooks/useWorkout';
-
-interface Workout {
-  id: number;
-  title: string;
-  description: string;
-  startDate: Date;
-  endDate: Date;
-  totalDays: number;
-  frequency: number;
-  completedDays: number;
-  totalMissing: number;
-  duration:number,
-  state:string
-}
+import { useSelector} from 'react-redux';
+import { RootState } from '../../reducer/index';
 
 export default function Exercises() {
   const { getWorkouts } = useWorkout();
-  const [workouts, setWorkouts] = useState<Workout[]>([]);
+  const {exercises,workouts}=useSelector((state:RootState)=>state.workout)
+
   const [filter, setFilter] = useState<string>('active');
   useEffect(() => {
-    const filteredWorkouts:Workout[] = getWorkouts(new Date(), filter);
-    setWorkouts(filteredWorkouts);
-    console.log(filteredWorkouts);
-  }, [filter]);
+    getWorkouts(new Date(), filter);
+  }, [filter,workouts]);
   
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setFilter(event.target.value);
   };
-   
   return (
     <div className={style.container}>
       <div className={style.header}>
@@ -45,8 +31,8 @@ export default function Exercises() {
         </div>
       </div>
       <div className={style.exercisesContainer}>
-        {workouts?.map((workout, index) => (
-          <ExerCisecard key={index} workout={workout} filter={filter} />
+        {exercises?.map((excercise, index) => (
+          <ExerCisecard key={index} workout={excercise} filter={filter} />
         ))}
       </div>
     </div>

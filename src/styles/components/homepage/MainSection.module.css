@@ -101,6 +101,7 @@
   font-family: "Poppins", sans-serif;
   font-weight: 600;
   color: rgb(90, 90, 90);
+  text-align: center;
 }
 
 .challengeoption {
@@ -123,9 +124,15 @@
 
 /* For small screens */
 @media (max-width: 768px) {
+  
   .start, .challenges, .activity {
+    align-items: center;
     flex-direction: column;
     width: 90%;
+  }
+  .activity{
+    flex-direction: column-reverse;
+    align-items: center;
   }
 
   .mainimage, .challengesimage, .activityimage {
@@ -136,26 +143,31 @@
   .startcontent, .challengescontent, .activitycontent {
     width: 100%;
     gap: 15px;
+    align-items: center;
   }
-
+  
   .challengescontent, .activitycontent {
     width: 100%;
   }
 
   .startcontent > h3 {
     font-size: 2.5rem;
+    text-align: center;
   }
 
   .challengescontent > h3, .activitycontent > h3 {
     font-size: 2rem;
+    text-align: center;
   }
 
   .startcontent > p {
     font-size: 1.2rem;
+    text-align: center;
   }
 
   .challengescontent > p, .activitycontent > p {
     font-size: 1rem;
+    text-align: center;
   }
 
   .activitycontent > button, .challengescontent > button {
@@ -163,12 +175,27 @@
     height: 45px;
     font-size: 0.9rem;
   }
+  .challengesoptions {
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    padding: 0 2rem;
+  }
+  
+  .challengesoptions > p {
+    font-size: 2rem;
+    text-align: center;
+  }
+  .challengeoption{
+    flex-direction: column;
+    align-items: center;
+  }
+  
 }
 
 /* For extra small screens */
 @media (max-width: 480px) {
   .container {
-    margin-top: 4rem;
     gap: 4rem;
   }
 
