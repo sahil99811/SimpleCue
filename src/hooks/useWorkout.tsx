@@ -43,7 +43,7 @@ const useWorkout = () => {
                 } else if (status === 'missed') {
                     return { ...workout, totalMissing: workout.totalMissing + 1, state: 'missed' };
                 } else if (status === 'completed') {
-                    return { ...workout, state: 'completed' };
+                    return { ...workout, state: 'completed',completedDays:workout.totalDays-workout.totalMissing };
                 }
             }
             return workout;
