@@ -1,4 +1,4 @@
-Based on the provided functionality and technical requirements for the SimpleCue project, here’s a detailed `README.md` file:
+
 
 # SimpleCue
 
