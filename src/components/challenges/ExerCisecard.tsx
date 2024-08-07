@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from '../../styles/components/challenges/ExerCisesCard.module.css';
 import useWorkout  from '../../hooks/useWorkout';
 
@@ -22,9 +22,10 @@ interface ExerCisecardProps {
 
 const ExerCisecard: React.FC<ExerCisecardProps> = ({ workout,filter }) => {
   const { updateTaskStatus } = useWorkout();
-  
+  const [radio,setRadio]=useState<string>("");
   const handleStatusChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const status = e.target.id;
+    setRadio(status)
     if (status === 'done') {
       updateTaskStatus(workout.id,'done')
     } else if(status==='missed') {
@@ -32,6 +33,9 @@ const ExerCisecard: React.FC<ExerCisecardProps> = ({ workout,filter }) => {
     }else {
       updateTaskStatus(workout.id,'completed')
     }
+    setTimeout(()=>{
+      setRadio('')
+    },1000)
   };
   return (
     <div className={style.container}>
@@ -46,15 +50,15 @@ const ExerCisecard: React.FC<ExerCisecardProps> = ({ workout,filter }) => {
       {
         (filter==='active')&&<div className={style.radioContainer}>
         <div className={style.radioOption}>
-          <input type="radio" id="done" name="task-status" className={style.radioInput} onChange={handleStatusChange} />
+          <input type="radio" id="done" name="task-status" className={style.radioInput} onChange={handleStatusChange} checked={radio === 'done'}/>
           <label htmlFor="done-task" className={style.radioLabel}>Done Task</label>
         </div>
         <div className={style.radioOption}>
-          <input type="radio" id="complete" name="task-status" className={style.radioInput} onChange={handleStatusChange} />
+          <input type="radio" id="complete" name="task-status" className={style.radioInput} onChange={handleStatusChange} checked={radio === 'complete'}/>
           <label htmlFor="complete-task" className={style.radioLabel}>Complete Task</label>
         </div>
         <div className={style.radioOption}>
-          <input type="radio" id="missed" name="task-status" className={style.radioInput} onChange={handleStatusChange} />
+          <input type="radio" id="missed" name="task-status" className={style.radioInput} onChange={handleStatusChange} checked={radio === 'missed'} />
           <label htmlFor="missed-task" className={style.radioLabel}>Missed Task</label>
         </div>
       </div>
