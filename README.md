@@ -1,6 +1,6 @@
 
 
-# SimpleCue
+# SimplyCue
 
 SimpleCue is a React.js application for managing personal challenges. It allows users to create, update, and track challenges, displaying progress and filtering challenges based on their status. The application uses TypeScript and persists data in `localStorage` for a seamless user experience.
 
