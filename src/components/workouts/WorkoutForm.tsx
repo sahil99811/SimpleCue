@@ -113,7 +113,7 @@ const WorkoutForm: React.FC<WorkoutFormProps> = ({ closeModal, type, workout, id
         </div>
       )}
       <button type='submit' className={style.button} >
-        {type === 'edit' ? 'Update Workout' : 'Add Workout'} // Button text based on form type
+        {type === 'edit' ? 'Update Workout' : 'Add Workout'} 
       </button>
     </form>
   );
