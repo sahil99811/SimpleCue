@@ -12,6 +12,7 @@ export default function ChallengesPage() {
       exercisesRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
+  
   return (
     <div className={style.container}>
       <GreetingSection question="What do you workout today?" desc="Start practicing your WorkOut!" buttonContent="Start Workout"  openModal={scrollToExercises}/>

@@ -17,7 +17,7 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     animation: "slideIn 1.5s ease-in-out",
-    zIndex:200
+    zIndex:"201"
   }
 };
 export default function WorkoutsPage() {
@@ -37,7 +37,7 @@ export default function WorkoutsPage() {
         style={customStyles}
         contentLabel="Create Group Modal"
       >
-       <WorkoutForm closeModal={closeModal}/>
+       <WorkoutForm closeModal={closeModal} type='add' />
       </Modal>
     </div>
   )

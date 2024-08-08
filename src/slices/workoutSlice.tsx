@@ -8,10 +8,10 @@ interface Workout {
     startDate: Date;
     endDate: Date;
     totalDays: number;
-    frequency: number;
+    frequency: string;
     completedDays: number;
     totalMissing: number;
-    duration:number,
+    duration:string,
     state:string
 }
 

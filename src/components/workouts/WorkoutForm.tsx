@@ -1,18 +1,38 @@
 import React from 'react';
 import useWorkoutForm from '../../hooks/useWorkoutForm';
 import style from '../../styles/components/workouts/WorkoutForm.module.css';
-
+import { useRef } from 'react';
+import toast from 'react-hot-toast';
+interface Workout {
+  title?: string;
+  description?: string;
+  frequency?: string;
+  duration?: string;
+  startDate?: Date;
+}
 
 interface WorkoutFormProps {
   closeModal: () => void;
+  type: 'add' | 'edit';
+  workout?: Workout;
+  id?:number
 }
 
-const WorkoutForm: React.FC<WorkoutFormProps> = ({ closeModal }) => {
-  const { formState, handleChange, handleSubmit } = useWorkoutForm(closeModal);
-
+const WorkoutForm: React.FC<WorkoutFormProps> = ({ closeModal, type, workout ,id=0}) => {
+  const startDateRef = useRef<HTMLInputElement | null>(null);
+  console.log("id",id);
+  const { formState, handleChange, handleSubmit,editWorkout } = useWorkoutForm(closeModal, workout);
+  const onClickHandler=(event: React.FormEvent<HTMLFormElement>)=>{
+      if(!startDateRef?.current?.value){
+        toast.error("select data")
+        return;
+      }
+     
+     type==='add'?handleSubmit(event,startDateRef?.current?.value):editWorkout(event,id)
+  }
   return (
-    <form onSubmit={handleSubmit} className={style.formContainer}>
-      <h2 className={style.heading}>Add Workout Description</h2>
+    <form onSubmit={onClickHandler} className={style.formContainer}>
+      <h2 className={style.heading}>{type === 'edit' ? 'Edit Workout Description' : 'Add Workout Description'}</h2>
       <div className={style.formGroup}>
         <label className={style.label}>Title</label>
         <select 
@@ -74,18 +94,19 @@ const WorkoutForm: React.FC<WorkoutFormProps> = ({ closeModal }) => {
           <option value="7">7 weeks</option>
         </select>
       </div>
-      <div className={style.formGroup}>
-        <label className={style.label}>Start Date</label>
-        <input 
-          name="startDate" 
-          type='date' 
-          value={formState.startDate} 
-          onChange={handleChange} 
-          className={style.input}
-        />
-      </div> 
-      <button type='submit' className={style.button}>
-        Add Challenge
+      {type === 'add' && (
+        <div className={style.formGroup}>
+          <label className={style.label}>Start Date</label>
+          <input 
+            name="startDate" 
+            type='date' 
+            ref={startDateRef}
+            className={style.input}
+          />
+        </div>
+      )}
+      <button type='submit' className={style.button} >
+        {type === 'edit' ? 'Update Challenge' : 'Add Challenge'}
       </button>
     </form>
   );

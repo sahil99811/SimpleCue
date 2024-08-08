@@ -17,6 +17,7 @@ export default function Exercises() {
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setFilter(event.target.value);
   };
+  console.log(exercises)
   return (
     <div className={style.container}>
       <div className={style.header}>
