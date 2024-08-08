@@ -6,7 +6,8 @@ Modal.setAppElement("#root");
 import style from '../styles/pages/Workouts.module.css'
 const customStyles = {
   overlay: {
-      backgroundColor: 'rgba(47, 47, 47, 0.75)'
+      backgroundColor: 'rgba(47, 47, 47, 0.75)',
+      zIndex: 200,
     },
   content: {
     top: "50%",
@@ -17,7 +18,6 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     animation: "slideIn 1.5s ease-in-out",
-    zIndex:"201"
   }
 };
 export default function WorkoutsPage() {

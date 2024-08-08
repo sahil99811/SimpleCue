@@ -6,6 +6,7 @@
     background: rgb(222,221,190);
     background: linear-gradient(117deg, rgba(222,221,190,0.9922455578315549) 0%, rgba(243,234,200,0.8428553139291158) 100%);
     border-radius: 10px;
+    position: relative;
   }
   
   /* Header Styles */
@@ -18,7 +19,7 @@
     position:absolute ;
     float: right;
     right: 0;
-    margin-right: 3rem;
+    margin-right: 1rem;
     width: 50px;
     height: 30px;
     background-color: aquamarine;
