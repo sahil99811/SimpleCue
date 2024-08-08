@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react'; // Import React and hooks
+import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react'; // Import React and hooks
 import style from '../../styles/components/challenges/Exercises.module.css'; // Import CSS module for styling
-import ExerCisecard from './ExerCisecard'; // Import ExerCisecard component
 import useWorkout from '../../hooks/useWorkout'; // Import custom hook for workout logic
 import { useSelector } from 'react-redux'; // Import useSelector for Redux state
 import { RootState } from '../../reducer/index'; // Import RootState type
+
+// Lazy load the ExerCisecard component
+const ExerCisecard = lazy(() => import('./ExerCisecard'));
 
 export default function Exercises() {
   // Destructure getWorkouts function from custom hook useWorkout
@@ -44,9 +46,11 @@ export default function Exercises() {
 
       {/* Container for rendering filtered exercises */}
       <div className={style.exercisesContainer}>
-        {exercises?.map((exercise, index) => (
-          <ExerCisecard key={index} workout={exercise} filter={filter} />
-        ))}
+        <Suspense fallback={<div>Loading exercises...</div>}>
+          {exercises?.map((exercise, index) => (
+            <ExerCisecard key={index} workout={exercise} filter={filter} />
+          ))}
+        </Suspense>
       </div>
     </div>
   );
