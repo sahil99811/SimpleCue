@@ -1,6 +1,6 @@
 import React from 'react';
 import workout from '../../assets/workout.png';
-import style from '../../styles/components/challenges/GreetingSection.module.css';
+import style from '../../styles/components/common/GreetingSection.module.css';
 interface GreetingSectionProps{
    desc:string,
    question:string,

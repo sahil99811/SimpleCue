@@ -9,7 +9,6 @@ const useWorkout = () => {
     const getDailyExercise = (date: Date) => {
         console.log("funciton called");
         const res=workouts.filter(workout => {
-            console.log(workout.totalDays,workout.totalMissing,workout.completedDays)
             return workout.completedDays + workout.totalMissing !== workout.totalDays && 
                 workout.completedDays !== workout.totalDays&&new Date(date) >= new Date(workout.startDate)&&new Date(workout.endDate)>=new Date(date);
         });
@@ -48,7 +47,6 @@ const useWorkout = () => {
             }
             return workout;
         });
-        console.log(newWorkouts);
         dispatch(addWorkout(newWorkouts));
     };
     return { getWorkouts,updateTaskStatus };

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import arm from '../../assets/arm.png';
 import navbar from '../../assets/navbar.png';
-import style from '../../styles/components/homepage/NavBar.module.css';
+import style from '../../styles/components/common/NavBar.module.css';
 import { Link, useLocation } from 'react-router-dom';
 
 const NavBar: React.FC = () => {
