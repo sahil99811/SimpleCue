@@ -1,4 +1,4 @@
-import React from 'react'; // Import React
+import React, { useCallback } from 'react'; // Import React and useCallback
 import workout from '../../assets/workout.png'; // Import workout image
 import style from '../../styles/components/common/GreetingSection.module.css'; // Import CSS module for styling
 
@@ -11,12 +11,12 @@ interface GreetingSectionProps {
 }
 
 // GreetingSection functional component
-const GreetingSection: React.FC<GreetingSectionProps> = ({ question, desc, buttonContent, openModal }) => {
-
-  // Handler function for button click
-  const onClickHandler = () => {
+const GreetingSection: React.FC<GreetingSectionProps> = React.memo(({ question, desc, buttonContent, openModal }) => {
+  
+  // Memoize the handler function to prevent re-creation on every render
+  const onClickHandler = useCallback(() => {
     openModal(); // Call the openModal function passed via props
-  };
+  }, [openModal]); // Dependency array includes openModal to keep the handler updated if openModal changes
 
   return (
     <section className={style.container}>
@@ -38,6 +38,6 @@ const GreetingSection: React.FC<GreetingSectionProps> = ({ question, desc, butto
       </div>
     </section>
   );
-};
+});
 
 export default GreetingSection;

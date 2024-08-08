@@ -8,7 +8,6 @@ const useWorkout = () => {
 
     // Function to get daily exercises based on the date
     const getDailyExercise = (date: Date) => {
-        console.log("function called"); // Debugging statement
         const res = workouts.filter(workout => {
             console.log(workout.totalDays, workout.totalMissing, workout.completedDays); // Debugging statement
             return workout.completedDays + workout.totalMissing !== workout.totalDays && 

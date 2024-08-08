@@ -15,7 +15,7 @@ interface ChallengesCardProps {
 }
 
 // ChallengesCard component to display individual challenge details
-const ChallengesCard: React.FC<ChallengesCardProps> = ({ data }) => {
+const ChallengesCard: React.FC<ChallengesCardProps> = React.memo(({ data }) => {
   return (
     <div className={style.container}> {/* Container for the card */}
       <img src={data.imgSrc} alt={data.name} className={style.image} /> {/* Display challenge image */}
@@ -23,6 +23,6 @@ const ChallengesCard: React.FC<ChallengesCardProps> = ({ data }) => {
       <p className={style.description}>{data.desc}</p> {/* Display challenge description */}
     </div>
   );
-}
+});
 
 export default ChallengesCard;

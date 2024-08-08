@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // Import React and useState hook
+import React, { useState, useCallback } from 'react'; // Import React and useState, useCallback hooks
 import arm from '../../assets/arm.png'; // Import logo image
 import navbar from '../../assets/navbar.png'; // Import hamburger menu image
 import style from '../../styles/components/common/NavBar.module.css'; // Import CSS module for styling
@@ -12,19 +12,19 @@ const NavBar: React.FC = () => {
   const location = useLocation();
 
   // Function to check if the current route matches the provided route
-  const matchRoute = (route: string): boolean => {
+  const matchRoute = useCallback((route: string): boolean => {
     return route === location.pathname;
-  };
+  }, [location.pathname]); // Dependency array includes location.pathname
 
-  // Function to toggle the mobile menu open/close state
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
+  // Memoized function to toggle the mobile menu open/close state
+  const toggleMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(prevState => !prevState);
+  }, []); // Empty dependency array ensures function is memoized
 
-  // Function to close the mobile menu
-  const closeMobileMenu = () => {
+  // Memoized function to close the mobile menu
+  const closeMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(false);
-  };
+  }, []); // Empty dependency array ensures function is memoized
 
   return (
     <div className={style.container}>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // Import React and useState hook
+import React, { useState, useCallback } from 'react'; // Import React, useState, and useCallback hooks
 import style from '../../styles/components/challenges/ExerCisesCard.module.css'; // Import CSS module for styling
 import useWorkout from '../../hooks/useWorkout'; // Import custom hook for workout logic
 import Modal from "react-modal"; // Import Modal component for displaying modals
@@ -44,26 +44,24 @@ interface ExerCisecardProps {
 }
 
 // ExerCisecard functional component
-const ExerCisecard: React.FC<ExerCisecardProps> = ({ workout, filter }) => {
+const ExerCisecard: React.FC<ExerCisecardProps> = React.memo(({ workout, filter }) => {
   const [modalIsOpen, setIsOpen] = useState<boolean>(false); // State to manage modal visibility
-
-  // Function to open the modal
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  // Function to close the modal
-  function closeModal() {
-    setIsOpen(false);
-  }
 
   // Destructure updateTaskStatus from custom hook useWorkout
   const { updateTaskStatus } = useWorkout();
 
-  const [radio, setRadio] = useState<string>(""); // State to manage selected radio button
+  // Memoize openModal function
+  const openModal = useCallback(() => {
+    setIsOpen(true);
+  }, []); // Empty dependency array ensures this function is memoized
 
-  // Handler for status change
-  const handleStatusChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Memoize closeModal function
+  const closeModal = useCallback(() => {
+    setIsOpen(false);
+  }, []); // Empty dependency array ensures this function is memoized
+
+  // Memoize handleStatusChange function
+  const handleStatusChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const status = e.target.id;
     setRadio(status);
 
@@ -80,7 +78,9 @@ const ExerCisecard: React.FC<ExerCisecardProps> = ({ workout, filter }) => {
     setTimeout(() => {
       setRadio('');
     }, 1000);
-  };
+  }, [updateTaskStatus, workout.id]); // Dependencies include updateTaskStatus and workout.id
+
+  const [radio, setRadio] = useState<string>(""); // State to manage selected radio button
 
   return (
     <>
@@ -126,6 +126,6 @@ const ExerCisecard: React.FC<ExerCisecardProps> = ({ workout, filter }) => {
       </div>
     </>
   );
-};
+});
 
 export default ExerCisecard;

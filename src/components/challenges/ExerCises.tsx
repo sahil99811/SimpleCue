@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; // Import React and hooks
+import React, { useState, useEffect, useCallback } from 'react'; // Import React and hooks
 import style from '../../styles/components/challenges/Exercises.module.css'; // Import CSS module for styling
 import ExerCisecard from './ExerCisecard'; // Import ExerCisecard component
 import useWorkout from '../../hooks/useWorkout'; // Import custom hook for workout logic
@@ -20,10 +20,10 @@ export default function Exercises() {
     getWorkouts(new Date(), filter); // Fetch workouts based on current date and filter
   }, [filter, workouts]); // Dependency array includes filter and workouts
 
-  // Handler function to update filter state based on user selection
-  const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  // Memoize the handler function to update filter state
+  const handleFilterChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
     setFilter(event.target.value);
-  };
+  }, []); // Empty dependency array ensures that the function is memoized
 
   console.log(exercises); // Log exercises for debugging
 
@@ -44,8 +44,8 @@ export default function Exercises() {
 
       {/* Container for rendering filtered exercises */}
       <div className={style.exercisesContainer}>
-        {exercises?.map((excercise, index) => (
-          <ExerCisecard key={index} workout={excercise} filter={filter} />
+        {exercises?.map((exercise, index) => (
+          <ExerCisecard key={index} workout={exercise} filter={filter} />
         ))}
       </div>
     </div>

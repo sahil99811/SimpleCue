@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import { RootState } from '../reducer'; // Import RootState type for Redux store state
@@ -32,7 +32,7 @@ interface UseWorkoutFormReturn {
   formState: FormState; // State of the form inputs
   handleChange: (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void; // Handler for input changes
   handleSubmit: (e: React.FormEvent<HTMLFormElement>, date: string) => void; // Handler for form submission
-  editWorkout: (e: React.FormEvent<HTMLFormElement>, i: number) => void; // Handler for editing a workout
+  editWorkout: (e: React.FormEvent<HTMLFormElement>, id: number) => void; // Handler for editing a workout
 }
 
 // Define the useWorkoutForm custom hook
@@ -50,16 +50,16 @@ const useWorkoutForm = (closeModal: UseWorkoutFormProps['closeModal'], workout?:
   });
 
   // Handler for input changes
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormState(prevState => ({
       ...prevState,
       [name]: value
     }));
-  };
+  }, []);
 
   // Handler for form submission to add a new workout
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>, date: string) => {
+  const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>, date: string) => {
     e.preventDefault();
     // Validate form fields
     if (!formState.title || !formState.description || !formState.frequency || !formState.duration) {
@@ -71,7 +71,7 @@ const useWorkoutForm = (closeModal: UseWorkoutFormProps['closeModal'], workout?:
     const freq = Number(formState.frequency);
     const dur = Number(formState.duration);
     const endDate = new Date(date);
-    endDate.setDate(endDate.getDate() + (Number(formState.duration) * 7));
+    endDate.setDate(endDate.getDate() + (dur * 7));
     const newObj = {
       title: formState.title,
       frequency: formState.frequency,
@@ -87,9 +87,7 @@ const useWorkoutForm = (closeModal: UseWorkoutFormProps['closeModal'], workout?:
     };
 
     // Dispatch action to add new workout and reset form state
-    const newWorkouts = [...workouts, newObj];
-    dispatch(addWorkout(newWorkouts));
-    console.log(formState);
+    dispatch(addWorkout([...workouts, newObj]));
     setFormState({
       title: '',
       description: '',
@@ -97,10 +95,10 @@ const useWorkoutForm = (closeModal: UseWorkoutFormProps['closeModal'], workout?:
       duration: ''
     });
     closeModal();
-  };
+  }, [formState, workouts, dispatch, closeModal]);
 
   // Handler for editing an existing workout
-  const editWorkout = (e: React.FormEvent<HTMLFormElement>, id: number) => {
+  const editWorkout = useCallback((e: React.FormEvent<HTMLFormElement>, id: number) => {
     e.preventDefault();
     console.log("edit button called");
     const newWorkouts = workouts.map((workout) => {
@@ -123,7 +121,7 @@ const useWorkoutForm = (closeModal: UseWorkoutFormProps['closeModal'], workout?:
     // Dispatch action to update workout list
     dispatch(addWorkout(newWorkouts));
     closeModal();
-  };
+  }, [formState, workouts, dispatch, closeModal]);
 
   return {
     formState,
