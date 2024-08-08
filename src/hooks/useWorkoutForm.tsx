@@ -111,6 +111,7 @@ const useWorkoutForm = (closeModal: UseWorkoutFormProps['closeModal'],workout?:W
     });
   
     dispatch(addWorkout(newWorkouts));
+    closeModal();
   };
   
   return {

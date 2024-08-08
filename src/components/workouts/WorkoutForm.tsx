@@ -23,12 +23,12 @@ const WorkoutForm: React.FC<WorkoutFormProps> = ({ closeModal, type, workout ,id
   console.log("id",id);
   const { formState, handleChange, handleSubmit,editWorkout } = useWorkoutForm(closeModal, workout);
   const onClickHandler=(event: React.FormEvent<HTMLFormElement>)=>{
-      if(!startDateRef?.current?.value){
+      if(!startDateRef?.current?.value && type!=='edit'){
         toast.error("select data")
         return;
       }
      
-     type==='add'?handleSubmit(event,startDateRef?.current?.value):editWorkout(event,id)
+     type==='add'?handleSubmit(event,startDateRef?.current?.value||""):editWorkout(event,id)
   }
   return (
     <form onSubmit={onClickHandler} className={style.formContainer}>
