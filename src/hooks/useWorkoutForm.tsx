@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
-import { RootState } from '../reducer'; // Adjust the import path according to your project structure
-import {addWorkout} from '../slices/workoutSlice'; // Adjust the import path according to your project structure
+import { RootState } from '../reducer'; // Import RootState type for Redux store state
+import { addWorkout } from '../slices/workoutSlice'; // Import action creator for adding workouts
 
+// Define the shape of the workout object
 interface Workout {
   title?: string;
   description?: string;
@@ -11,6 +12,7 @@ interface Workout {
   duration?: string;
   startDate?: Date;
 }
+
 // Define the shape of the form state
 interface FormState {
   title: string;
@@ -21,29 +23,33 @@ interface FormState {
 
 // Define the props for the hook
 interface UseWorkoutFormProps {
-  closeModal: () => void;
-  workout?:object;
+  closeModal: () => void; // Function to close the modal
+  workout?: Workout; // Optional workout object for editing
 }
 
 // Define the return type of the hook
 interface UseWorkoutFormReturn {
-  formState: FormState;
-  handleChange: (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>,date:string) => void;
-  editWorkout:(e: React.FormEvent<HTMLFormElement>,i:number)=>void
+  formState: FormState; // State of the form inputs
+  handleChange: (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void; // Handler for input changes
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>, date: string) => void; // Handler for form submission
+  editWorkout: (e: React.FormEvent<HTMLFormElement>, i: number) => void; // Handler for editing a workout
 }
 
-const useWorkoutForm = (closeModal: UseWorkoutFormProps['closeModal'],workout?:Workout): UseWorkoutFormReturn => {
-  const dispatch = useDispatch();
-  const {workouts}=useSelector((state:RootState)=>state.workout)
-  console.log(workouts);
+// Define the useWorkoutForm custom hook
+const useWorkoutForm = (closeModal: UseWorkoutFormProps['closeModal'], workout?: Workout): UseWorkoutFormReturn => {
+  const dispatch = useDispatch(); // Get the dispatch function from Redux
+  const { workouts } = useSelector((state: RootState) => state.workout); // Get workouts from the Redux store
+  console.log(workouts); // Log workouts to the console for debugging
+
+  // Initialize form state with optional workout data or empty values
   const [formState, setFormState] = useState<FormState>({
-    title:workout?.title ||'',
-    description:workout?.description||'',
-    frequency:workout?.frequency|| '',
-    duration:workout?.duration|| ''
+    title: workout?.title || '',
+    description: workout?.description || '',
+    frequency: workout?.frequency || '',
+    duration: workout?.duration || ''
   });
 
+  // Handler for input changes
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormState(prevState => ({
@@ -52,34 +58,36 @@ const useWorkoutForm = (closeModal: UseWorkoutFormProps['closeModal'],workout?:W
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>,date:string) => {
+  // Handler for form submission to add a new workout
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>, date: string) => {
     e.preventDefault();
-    if (!formState.title || !formState.description || !formState.frequency ||!formState.duration) {
+    // Validate form fields
+    if (!formState.title || !formState.description || !formState.frequency || !formState.duration) {
       toast.error("All fields are required...");
       return;
     }
-    const freq=Number(formState.frequency);
-    const dur=Number(formState.duration);
-    const endDate=new Date(date);
-    endDate.setDate(endDate.getDate()+(Number(formState.duration)*7));
-    const weeks=[];
-    for(let i=0;i<dur;i++){
-      weeks.push(0);
-    }
-    const newObj={
-      title:formState.title,
-      frequency:formState.frequency,
-      duration:formState.duration,
-      startDate:new Date(date),
-      description:formState.description,
-      id:workouts.length,
+
+    // Calculate end date and create new workout object
+    const freq = Number(formState.frequency);
+    const dur = Number(formState.duration);
+    const endDate = new Date(date);
+    endDate.setDate(endDate.getDate() + (Number(formState.duration) * 7));
+    const newObj = {
+      title: formState.title,
+      frequency: formState.frequency,
+      duration: formState.duration,
+      startDate: new Date(date),
+      description: formState.description,
+      id: workouts.length,
       endDate,
-      totalDays:freq*dur,
-      completedDays:0,
-      totalMissing:0,
-      state:"active"
-    }
-    const newWorkouts=[...workouts,newObj];
+      totalDays: freq * dur,
+      completedDays: 0,
+      totalMissing: 0,
+      state: "active"
+    };
+
+    // Dispatch action to add new workout and reset form state
+    const newWorkouts = [...workouts, newObj];
     dispatch(addWorkout(newWorkouts));
     console.log(formState);
     setFormState({
@@ -90,9 +98,11 @@ const useWorkoutForm = (closeModal: UseWorkoutFormProps['closeModal'],workout?:W
     });
     closeModal();
   };
-  const editWorkout = (e:React.FormEvent<HTMLFormElement>,id:number) => {
+
+  // Handler for editing an existing workout
+  const editWorkout = (e: React.FormEvent<HTMLFormElement>, id: number) => {
     e.preventDefault();
-    console.log("edit button called")
+    console.log("edit button called");
     const newWorkouts = workouts.map((workout) => {
       if (workout.id === id) {
         const endDate = new Date(workout.startDate);
@@ -104,16 +114,17 @@ const useWorkoutForm = (closeModal: UseWorkoutFormProps['closeModal'],workout?:W
           frequency: formState.frequency || workout.frequency,
           description: formState.description || workout.description,
           endDate,
-          totalDays:Number(formState.duration)*Number(formState.frequency)
+          totalDays: Number(formState.duration) * Number(formState.frequency)
         };
       }
       return workout;
     });
-  
+
+    // Dispatch action to update workout list
     dispatch(addWorkout(newWorkouts));
     closeModal();
   };
-  
+
   return {
     formState,
     handleChange,
@@ -122,4 +133,4 @@ const useWorkoutForm = (closeModal: UseWorkoutFormProps['closeModal'],workout?:W
   };
 };
 
-export default useWorkoutForm;
+export default useWorkoutForm; // Export the custom hook

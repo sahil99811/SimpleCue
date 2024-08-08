@@ -1,26 +1,26 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App'; // Main application component
-import './index.css'; // Global CSS styles
-import { Toaster } from "react-hot-toast"; // Toast notifications component
-import { Provider } from "react-redux"; // Provider component for Redux store
-import rootReducer from './reducer'; // Root reducer for Redux store
-import { configureStore } from '@reduxjs/toolkit'; // Function to configure the Redux store
+import ReactDOM from 'react-dom/client'; // Import ReactDOM for rendering the application
+import App from './App'; // Import the main App component
+import './index.css'; // Import global CSS styles
+import { Toaster } from "react-hot-toast"; // Import Toaster for toast notifications
+import { Provider } from "react-redux"; // Import Provider to connect Redux store to React
+import rootReducer from './reducer'; // Import the rootReducer for Redux
+import { configureStore } from '@reduxjs/toolkit'; // Import configureStore to create the Redux store
 
-// Configure the Redux store with the root reducer
+// Create and configure the Redux store with the rootReducer
 const store = configureStore({
   reducer: rootReducer,
 });
 
-import { BrowserRouter } from 'react-router-dom'; // BrowserRouter component for routing
+import { BrowserRouter } from 'react-router-dom'; // Import BrowserRouter for handling routing
 
-// Render the application
+// Render the React application
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <Provider store={store}> {/* Provide the Redux store to the application */}
-    <React.StrictMode> {/* StrictMode helps identify potential problems in the application */}
-      <BrowserRouter> {/* Router component to handle routing in the application */}
-        <App /> {/* Main application component */}
-        <Toaster /> {/* Toast notifications component */}
+    <React.StrictMode> {/* Enable strict mode to help with identifying potential problems */}
+      <BrowserRouter> {/* Set up routing for the application */}
+        <App /> {/* Render the main App component */}
+        <Toaster /> {/* Render Toaster for toast notifications */}
       </BrowserRouter>
     </React.StrictMode>
   </Provider>

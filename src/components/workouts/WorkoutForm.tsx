@@ -1,8 +1,9 @@
-import React from 'react';
-import useWorkoutForm from '../../hooks/useWorkoutForm';
-import style from '../../styles/components/workouts/WorkoutForm.module.css';
-import { useRef } from 'react';
-import toast from 'react-hot-toast';
+import React from 'react'; // Import React
+import useWorkoutForm from '../../hooks/useWorkoutForm'; // Import custom hook for handling form logic
+import style from '../../styles/components/workouts/WorkoutForm.module.css'; // Import CSS module for styling
+import { useRef } from 'react'; // Import useRef for managing form references
+import toast from 'react-hot-toast'; // Import toast for displaying notifications
+
 interface Workout {
   title?: string;
   description?: string;
@@ -12,24 +13,30 @@ interface Workout {
 }
 
 interface WorkoutFormProps {
-  closeModal: () => void;
-  type: 'add' | 'edit';
-  workout?: Workout;
-  id?:number
+  closeModal: () => void; // Function to close the modal
+  type: 'add' | 'edit'; // Type of form (add or edit)
+  workout?: Workout; // Optional workout object for editing
+  id?: number; // Optional workout id for editing
 }
 
-const WorkoutForm: React.FC<WorkoutFormProps> = ({ closeModal, type, workout ,id=0}) => {
-  const startDateRef = useRef<HTMLInputElement | null>(null);
-  console.log("id",id);
-  const { formState, handleChange, handleSubmit,editWorkout } = useWorkoutForm(closeModal, workout);
-  const onClickHandler=(event: React.FormEvent<HTMLFormElement>)=>{
-      if(!startDateRef?.current?.value && type!=='edit'){
-        toast.error("select data")
-        return;
-      }
-     
-     type==='add'?handleSubmit(event,startDateRef?.current?.value||""):editWorkout(event,id)
+const WorkoutForm: React.FC<WorkoutFormProps> = ({ closeModal, type, workout, id = 0 }) => {
+  const startDateRef = useRef<HTMLInputElement | null>(null); // Reference for the start date input
+  console.log("id", id); // Debugging statement
+
+  // Destructure form state and handlers from the custom hook
+  const { formState, handleChange, handleSubmit, editWorkout } = useWorkoutForm(closeModal, workout);
+
+  // Handler for form submission
+  const onClickHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    if (!startDateRef?.current?.value && type !== 'edit') {
+      toast.error("Select a start date"); // Display an error if no start date is selected and type is 'add'
+      return;
+    }
+
+    // Call appropriate handler based on form type
+    type === 'add' ? handleSubmit(event, startDateRef?.current?.value || "") : editWorkout(event, id);
   }
+
   return (
     <form onSubmit={onClickHandler} className={style.formContainer}>
       <h2 className={style.heading}>{type === 'edit' ? 'Edit Workout Description' : 'Add Workout Description'}</h2>
@@ -100,13 +107,13 @@ const WorkoutForm: React.FC<WorkoutFormProps> = ({ closeModal, type, workout ,id
           <input 
             name="startDate" 
             type='date' 
-            ref={startDateRef}
+            ref={startDateRef} // Attach reference to the start date input
             className={style.input}
           />
         </div>
       )}
       <button type='submit' className={style.button} >
-        {type === 'edit' ? 'Update Challenge' : 'Add Challenge'}
+        {type === 'edit' ? 'Update Workout' : 'Add Workout'} // Button text based on form type
       </button>
     </form>
   );

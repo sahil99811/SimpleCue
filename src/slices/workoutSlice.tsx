@@ -11,36 +11,34 @@ interface Workout {
     frequency: string;
     completedDays: number;
     totalMissing: number;
-    duration:string,
-    state:string
+    duration: string;
+    state: string;
 }
 
-
-interface WorkoutState {
+// Define the state shape for the workout slice
+export interface WorkoutState { // Export WorkoutState
     workouts: Workout[];
-    exercises:Workout[]
-
+    exercises: Workout[];
 }
 
 const initialState: WorkoutState = {
     workouts: localStorage.getItem('workouts') ? JSON.parse(localStorage.getItem('workouts') as string) : [],
-    exercises:[]
+    exercises: []
 };
-
 
 const workoutSlice = createSlice({
     name: 'workout',
-    initialState, 
+    initialState,
     reducers: {
         addWorkout(state, action: PayloadAction<Workout[]>) {
-            state.workouts = action.payload; 
-            localStorage.setItem('workouts', JSON.stringify(state.workouts)); 
+            state.workouts = action.payload;
+            localStorage.setItem('workouts', JSON.stringify(state.workouts));
         },
-        setExercises(state,action:PayloadAction<Workout[]>){
-            state.exercises=action.payload;
+        setExercises(state, action: PayloadAction<Workout[]>) {
+            state.exercises = action.payload;
         }
     }
 });
 
-export const { addWorkout,setExercises} = workoutSlice.actions;
+export const { addWorkout, setExercises } = workoutSlice.actions;
 export default workoutSlice.reducer;
