@@ -1,5 +1,5 @@
 import { useState } from 'react'; // Import useState for managing component state
-import WorkoutForm from '../components/workouts/WorkoutForm'; // Import the WorkoutForm component for adding workouts
+import WorkoutForm from '../components/common/WorkoutForm'
 import GreetingSection from '../components/common/GreetingSection'; // Import the GreetingSection component for introductory text and button
 import Modal from "react-modal"; // Import Modal for displaying modals
 import style from '../styles/pages/Workouts.module.css'

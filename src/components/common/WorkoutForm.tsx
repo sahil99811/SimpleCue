@@ -1,6 +1,6 @@
 import React, { useCallback, useRef } from 'react'; // Import React and useRef
 import useWorkoutForm from '../../hooks/useWorkoutForm'; // Import custom hook for handling form logic
-import style from '../../styles/components/workouts/WorkoutForm.module.css'; // Import CSS module for styling
+import style from '../../styles/components/common/WorkoutForm.module.css'; // Import CSS module for styling
 import toast from 'react-hot-toast'; // Import toast for displaying notifications
 
 interface Workout {

@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react'; // Import React, useState,
 import style from '../../styles/components/challenges/ExerCisesCard.module.css'; // Import CSS module for styling
 import useWorkout from '../../hooks/useWorkout'; // Import custom hook for workout logic
 import Modal from "react-modal"; // Import Modal component for displaying modals
-import WorkoutForm from '../workouts/WorkoutForm'; // Import WorkoutForm component for editing workouts
+import WorkoutForm from '../common/WorkoutForm'; // Import WorkoutForm component for editing workouts
 
 // Custom styles for the modal
 const customStyles = {
